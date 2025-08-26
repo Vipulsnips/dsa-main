@@ -60,17 +60,17 @@ using namespace std;
 //-----------------------------static member---------------------
 
 
-class student{
+// class student{
 
-    // static int totalstudents;
-    public:
-    int roll,age;
-    static int totalstudents;                    //static member h totalstudents which means vo sirf class me stored rhega and copy nhi bnegi uski
-    static int gettotal(){
-        return totalstudents;
-    }
-    student(){
-        totalstudents++;
-    }
-}; 
-int student :: totalstudents=0;                 //initialisation will be done outside the class
+//     // static int totalstudents;
+//     public:
+//     int roll,age;
+//     static int totalstudents;                    //static member h totalstudents which means vo sirf class me stored rhega and copy nhi bnegi uski
+//     static int gettotal(){
+//         return totalstudents;
+//     }
+//     student(){
+//         totalstudents++;
+//     }
+// }; 
+// int student :: totalstudents=0;                 //initialisation will be done outside the class

@@ -1,10 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long 
-#include "C:\Users\user\OneDrive\Desktop\c++\c++ begin\oops\class.cpp"
-#include "C:\Users\user\OneDrive\Desktop\c++\c++ begin\oops\class_2.cpp"
-
-
+#include "C:\Users\vipul\OneDrive\Desktop\dsa main\class.cpp"
+#include "C:\Users\vipul\OneDrive\Desktop\dsa main\class_2.cpp"
 
 //-----------SHADOW AND DEEP COPYING--------------------------------
 // int main(){
@@ -118,11 +116,26 @@ using namespace std;
 
 //------------------------Operator Overloading 2 ------------------
 
-// int main(){
-//     fraction f1( 2,5);
-//     f1.print();
-//     ++f1;
-//     f1.print();
-// }
+int main(){
+    //----------------------- pre increment --------------------
+    fraction f1( 10,2);
+    f1.print();
+    // fraction f2=++f1;
+    // fraction f2= ++(++f1);
+    // f1.print();            // value gets stored in empty buffer so f1 is incremented only once_flag
+    // f2.print();              // fr gets the incremented value of temp so it gets the correct value
+    
+    //----------------------- post increment --------------------
+    // fraction f2= f1++;
+    // fraction f2= (f1++)++;
+    // f2.print();         // fr gets the value of f1 before increment so it gets the correct value
+    // f1.print();
+
+    //-------------------- += operator --------------------
+    fraction f2(3,4);
+    (f2+=f1 )+=f1;
+    f1.print();
+    f2.print();
+}
 
 

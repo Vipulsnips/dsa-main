@@ -113,7 +113,7 @@ class fraction{
     //     denominator=lcm;
     //     simplify();
     // }
-    fraction add(fraction const &f2) const {                                     //(fraction const &f2)  passed thru ref variable no changes can be made on the original f2
+    fraction add(fraction const &f2) const {                 //(fraction const &f2)  passed thru ref variable no changes can be made on the original f2
         int lcm=denominator*f2.denominator;                  //lcm=this->denominator*f2.denominator;
         int x=lcm/denominator;
         int y=lcm/f2.denominator;
@@ -121,17 +121,17 @@ class fraction{
         f3.simplify();
         return f3;
     }
-    fraction operator*(fraction const &f2)const{
+    fraction operator*(fraction const &f2)const{            //we added const here as we are not changing "this" value
         int n=this->numerator*f2.numerator;
         int d=this->denominator*f2.denominator;
         fraction fnew(n,d);
         fnew.simplify();
         return fnew;
     }
-    bool operator==(fraction const &f2) const{
+    bool operator==(fraction const &f2) const{              //we added const here as we are not changing "this" value            
         return (numerator==f2.numerator && denominator==f2.denominator);
     }
-    fraction operator+(fraction const &f2) const{                                    
+    fraction operator+(fraction const &f2) const{             //we added const here as we are not changing "this" value                                   
         int lcm=denominator*f2.denominator;                
         int x=lcm/denominator;
         int y=lcm/f2.denominator;
@@ -139,7 +139,6 @@ class fraction{
         f3.simplify();
         return f3;
     }
-
     // void multiply(fraction const &f2){                      //using ref variable &
     //     numerator=numerator*f2.numerator;
     //     denominator=denominator*f2.denominator;
@@ -151,10 +150,35 @@ class fraction{
         simplify();
     }
     // pre increment
-    void operator++(){
-        this->numerator += this-> denominator;
+    // void operator++(){
+        //     this->numerator += this-> denominator;
+        //     simplify();
+        // }    
+    // fraction& operator++ (){
+    //     this->numerator += this-> denominator;
+    //     simplify();
+    //     return *this;
+    //     }
+    // };
+
+
+    //----------------post increment
+    fraction operator++(int){
+        fraction fnew(numerator,denominator);
+        numerator+=denominator;
         simplify();
-    }    
+        fnew.simplify();
+        return fnew;
+    }
+    //-------------------+= operator --------------------
+    fraction& operator+=( fraction const &fnew){
+        int lcm=denominator * fnew.denominator;
+        int x=lcm/denominator;
+        int y=lcm/fnew.denominator;
+        numerator = (x*numerator + y *fnew.numerator);
+        denominator= lcm;
+        simplify();
+        return *this;
+    }
+
 };
-
-
