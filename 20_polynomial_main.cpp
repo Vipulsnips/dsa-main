@@ -12,17 +12,21 @@ int main() {
     for(auto &i:b2) cin>>i; 
     polynomial p1,p2;
 for(int i=0;i<n;i++){
-    cout<<"p1: degree="<<a1[i]<<" coeff="<<a2[i]<<endl;
+    // cout<<"p1: degree="<<a1[i]<<" coeff="<<a2[i]<<endl;
     p1.setcoefficient(a1[i],a2[i]);
 }
 for(int i=0;i<m;i++){
-    cout<<"p2: degree="<<b1[i]<<" coeff="<<b2[i]<<endl;
+    // cout<<"p2: degree="<<b1[i]<<" coeff="<<b2[i]<<endl;
     p2.setcoefficient(b1[i],b2[i]);
 }
 
     polynomial p3=p1+p2;
+    polynomial p4=p1-p2;
+    polynomial p5=p1*p2;
     p1.print();
     p2.print();
     p3.print();
+    p4.print();
+    p5.print();
     return 0;
 }
