@@ -7,8 +7,9 @@ void print(node * head){
     while(temp!=NULL){
         cout<<(*temp).data<<" ";
         temp=temp->next;
-    }}
-
+    }
+}
+//--------------------------o(n^2) time complexity---------------------------
 // node* takeinput(){
 //     int data;cin>>data;
 //     node * head=NULL;
@@ -28,11 +29,15 @@ void print(node * head){
 //     }
 //     return head;
 // }
+
+//---------------------O(n) time complexity-------------------------
 node * takeinput(){
     int data;
+    int cnt=0;
     cin>>data;
     node * head = NULL, *tail= NULL;
     while(data != -1){
+        cnt++;
         node * n = new node (data);
         if(head==NULL){
             head=n;tail=n;
@@ -41,10 +46,20 @@ node * takeinput(){
             tail->next=n;
             tail=n;
         }
+        cin>>data;
     }
+    cout<<"size of ll is "<<cnt<<endl;
     return head;
 }
-int main() {
+int getindex(node * head, int i){
+    while(head->next!=NULL && i>0){
+        i--;
+        head=head->next;
+    }
+    if(head==NULL) return -1;
+    else return head->data;
+}
+// int main() {
     //-------------statically--------------
     // node n1(1);
     // node n2(2);
@@ -64,8 +79,41 @@ int main() {
     // node * n3 = new node (3);
     // node * n4 = new node (4);
     // n3-> next  =n4;
-    node *head; head= takeinput();
-    print(head);
+    //-----------------------TAKING INPUT AND PRINTING THE VALUES-----------------------------
+//     node *head; head= takeinput();
+//     print(head);
+//     cout<<"value at index 3 is "<<getindex(head,3)<<endl;
+//     return 0;
+// }
 
-    return 0;
+//---------------------------  INSERTING NODE AT I INDEX -----------------------------
+
+node * setll(node * n,node *head, int i){
+    node *temp= head;
+    if(i==0){
+        head=n;n->next=temp;
+        return head;
+    }
+    i--;
+    while(temp !=NULL && i>0){
+        temp=temp->next;
+        i--;
+    }
+    // node * temp2=temp->next;      //2 ways of inserting
+    // temp->next=n;
+    // n->next=temp2;
+    if(temp!=NULL){
+        n->next=temp->next;
+        temp->next=n;
+    }
+
+    return head;
+}
+int main(){
+    node* head =takeinput();
+    cout<<"NEW data and index"<<endl;
+    int data,i;cin>>data>>i;
+    node *n= new node(data);
+    head=setll(n,head,i);
+    print(head);
 }
