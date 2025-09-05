@@ -109,11 +109,63 @@ node * setll(node * n,node *head, int i){
 
     return head;
 }
+node * del(node *head , int i ){
+    node * temp=head;
+    if(i==0){
+        head=head->next;
+        return head;
+    }
+    int cnt=1;
+    while(temp!=NULL && cnt<i){
+        temp=temp->next;
+        cnt++;
+    }
+    if(temp->next!=NULL){
+        if(temp->next->next==NULL) temp->next=NULL;
+        else {
+            temp->next=temp->next->next;
+        }
+    }
+     return head;
+}
+int lengthrec(node * head){
+    if(head==NULL) return 0;
+    return 1+lengthrec(head->next);
+    
+}
+node * insertrec(node *head,node * n,int i){
+    if(head==NULL){
+        return head;
+    }
+    else if(i==0){
+        n->next=head->next;
+        head->next=n;
+    }
+    else if(i==-1){
+        n->next=head;
+        head=next;
+        return head;
+    }
+    insertrec(head->next,n,--i);
+}
 int main(){
     node* head =takeinput();
-    cout<<"NEW data and index"<<endl;
-    int data,i;cin>>data>>i;
-    node *n= new node(data);
-    head=setll(n,head,i);
-    print(head);
+    // cout<<"NEW data and index"<<endl;
+    // int data,i;cin>>data>>i;
+    // node *n= new node(data);
+    // head=setll(n,head,i);
+    
+    //-----------------delete at ith node----------
+    // int i;cin>>i;
+    // head=del(head,i);
+    // print(head);
+
+    //-------------length counting recursivelyyy-----------
+    // cout<<(lengthrec(head))<<endl;
+
+    //--------------inserting node recursively-------------
+    int data;cin>>data;
+    node * n =new node (data);
+    int i;cin>>i;
+    insertrec(head,n,--i);
 }
