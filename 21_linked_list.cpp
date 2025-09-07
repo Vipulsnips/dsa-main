@@ -133,20 +133,35 @@ int lengthrec(node * head){
     return 1+lengthrec(head->next);
     
 }
-node * insertrec(node *head,node * n,int i){
+node * insertrec(node *head,int data,int i){
     if(head==NULL){
         return head;
     }
     else if(i==0){
+        node * n= new node(data);
         n->next=head->next;
-        head->next=n;
-    }
-    else if(i==-1){
-        n->next=head;
-        head=next;
+        head->next=n; 
         return head;
     }
-    insertrec(head->next,n,--i);
+    else if(i==-1){
+        node * n= new node(data);
+        n->next=head;
+        head=n;
+        return head;
+    }
+    head->next=insertrec(head->next,data,--i);
+    return head;
+}
+node *deleterec(node *head ,int i){
+    if(i==0){
+        head->next=head->next->next;
+        return head;
+    }
+    else if (i==-1){
+        head=head->next;
+    }
+    head->next =deleterec(head->next,--i);
+    return head;
 }
 int main(){
     node* head =takeinput();
@@ -164,8 +179,13 @@ int main(){
     // cout<<(lengthrec(head))<<endl;
 
     //--------------inserting node recursively-------------
-    int data;cin>>data;
-    node * n =new node (data);
+    // int data;cin>>data;
+    // int i;cin>>i;
+    // head=insertrec(head,data,--i);
+    // print(head);
+
+    //------------------node deletion recursivelyyyyyyyyyyyyyy----------------
     int i;cin>>i;
-    insertrec(head,n,--i);
+    head=deleterec(head,--i);
+    print(head);
 }
