@@ -1,1 +1,2 @@
-        node *head= takeinput();
+
+    s1.push(103);

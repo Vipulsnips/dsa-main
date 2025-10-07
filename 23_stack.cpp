@@ -1,15 +1,18 @@
+#include <bits/stdc++.h>
+using namespace std;
+template <typename T > 
 class Stackusingarray{
-    int *data;
+    T *data;
     int nextindex;
     int capacity;
     public:
     Stackusingarray(int Totalsize){
-        data = new int [Totalsize];
+        data = new T [Totalsize];
         nextindex=0;
         capacity = Totalsize;
     }
     Stackusingarray(){
-        data = new int [4];
+        data = new T [4];
         nextindex=0;
         capacity = 4;
     }
@@ -21,11 +24,11 @@ class Stackusingarray{
         // else return false ;
         return nextindex==0;
     }
-    void push(int val){
+    void push(T val){
         if(nextindex== capacity) {
             // cout<<"Stack is full \n";
             // return;
-            int * newdata = new int [ 2* capacity];
+            T * newdata = new T [ 2* capacity];
             for(int i=0;i<capacity ; i++) newdata[i]=data[i];
             delete [] data;
             data=newdata;
@@ -34,17 +37,19 @@ class Stackusingarray{
         data[nextindex]=val;
         nextindex++;
     }
-    int pop(){
+    T pop(){
         if(isempty()){
             cout<<"Stack is empty\n";
-            return INT_MIN ;
+            // return INT_MIN ;
+            return 0;
         }
         return data[--nextindex];
     }
-    int top(){
+    T top(){
         if(isempty()){
             cout<<"Stack is empty\n";
-            return INT_MIN; 
+            // return INT_MIN; 
+            return 0;
         }
         return data[nextindex-1];
     }
@@ -59,4 +64,54 @@ class Pair {
     void sety(V y) { this->y = y; }
     T getx() { return x; }
     V gety() { return y; }
+};
+
+
+template <typename T>
+class node{
+    public:
+    node <T> * next;
+    T data;
+    node(T data) : data(data) , next(NULL) {}
+};
+template <typename T>
+class Stack{
+    node <T> * head; 
+    int size;
+    public:
+    Stack(){
+        size=0;
+        head=NULL;
+    }
+    void push(T data){
+        node <T>* n= new node <T>(data);
+        n->next= head;
+        head= n;
+        size++;
+    }
+    T pop(){
+        if(isempty()){
+            cout<<"stack is empty";
+            return 0;
+        }
+        node <T> * temp = head;
+        head=head->next;
+        T x= temp->data;
+        size--;
+        delete temp;
+        return x;
+    }
+    int getsize(){
+        return size;
+    }
+    bool isempty(){
+        return size==0;
+    }
+    T top(){
+        if(isempty()){
+            cout<<"stack is empty"<<endl;
+            return 0;
+        }
+        return head->data;
+    }
 };
