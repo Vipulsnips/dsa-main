@@ -16,3 +16,13 @@ class TreeNode{
         //root gets self deleted after scope ends
     }
 };
+
+class Pair{
+    public:
+    TreeNode <int> * node;
+    int sum;
+    Pair(){
+        node=NULL;
+        sum=0;
+    }
+};

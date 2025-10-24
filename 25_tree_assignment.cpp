@@ -56,23 +56,25 @@ TreeNode <int> * input(){
 // }
 
 //---------------------------- max sum of child nodees ------------------
-TreeNode<int> *  maxchildnodes(TreeNode <int> * root){
-    if(!root) return 0;
-    int ans=0;
-    TreeNode <int> * maxm=root;
+Pair * maxchildnodes(TreeNode <int> * root){
+    if(!root) { return new Pair(); }
+    Pair * p = new Pair();
+    int sum=0;
     for(auto i:root->children){
-        ans+=i->data;
+        sum+=i->data;
     }
+    p->node= root;
+    p->sum= sum;
     for(auto i:root->children){
-        if(maxchildnodes(i) > ans){
-            ans=maxchildnodes(i);
-            maxm=i;
-        }
+        Pair * n = maxchildnodes(i);
+        if(n->sum > p->sum) {p->node = n->node; p->sum=n->sum;}
     }
-    return maxm;
+    return p;
 }
 int main() {
     TreeNode <int > * root=input();
-    cout<<maxchildnodes(root)<<endl;
+    Pair * ans= maxchildnodes(root);
+    cout<<ans->node->data<<endl;
+    for(auto i:ans->node -> children) cout <<i->data<<" ";
     return 0;
 }
