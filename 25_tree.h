@@ -26,3 +26,13 @@ class Pair{
         sum=0;
     }
 };
+
+class pair2{
+    public:
+    int m;
+    int sm;
+    pair2(){
+        m=-1;
+        sm=-1;
+    }
+};
