@@ -53,7 +53,7 @@ TreeNode <int> * input(){
     return root;
 }
 
-//----------------------------------------- printing output  ------------------------
+//----------------------------------------- printing output level wise  ------------------------
 void print(TreeNode <int > * root ){ 
     if(root==NULL) return;
     queue <TreeNode <int > * > q;
@@ -119,6 +119,60 @@ void postorder(TreeNode <int> * root){
     postorder(root->right);
     cout<<root->data<<" ";
 }
+//---------------------------------------- contructing tree from preorder and inorder -----------------------------------------
+// pre= root left right
+// in = left root right
+TreeNode <int> * conversionmain( int * in , int *pre, int inS,int inE,int preS,int preE){
+    if(inS>inE) return NULL; 
+    int data= pre[preS];
+    // cout << "Creating node: " << data << " from pre[" << preS << "]" << endl;
+    TreeNode<int> * root = new TreeNode <int> (data);
+    int LinS,LinE,LpreS,LpreE;
+    int RinS,RinE,RpreS,RpreE;
+    int rootindex=-1;
+    for(int i=inS;i<=inE;i++){
+        if(in[i]==data){
+            rootindex=i;
+            break;
+        }
+    }
+    LinS=inS;
+    LinE=rootindex-1;
+    LpreS=preS+1;
+    LpreE=LinE-LinS+LpreS;
+    RinS=rootindex+1;
+    RinE=inE;
+    RpreS=LpreE+1;
+    RpreE=preE;
+    root->left=(conversionmain(in,pre, LinS, LinE,LpreS,LpreE));
+    root->right=(conversionmain(in,pre,RinS,RinE, RpreS,RpreE));
+    return root;
+}
+TreeNode <int> * conversion(int * in ,int* pre ,int size){
+    return conversionmain(  in , pre, 0, size-1, 0, size-1);
+}
+
+
+
+//-------------------------------------find diameter  O(n*h) where h is height
+int diameter(TreeNode <int> * root) {
+    if(!root) return 0;
+    int op1= height(root->left) + height (root->right);
+    int op2=diameter (root->left);
+    int op3=diameter (root->right);
+    return max(op1 , max( op2,op3));
+}
+
+//------------------------------------ optimised diamter finding  O(n) --------------------
+pair<int,int> diameterOp(TreeNode<int>* root) {
+    if (!root) return {0, 0};
+    pair<int, int> left = diameterOp(root->left);
+    pair<int, int> right = diameterOp(root->right);
+    int height = 1+max(left.first , right.first); 
+    int diameter = max(left.first + right.first , max(left.second , right.second));
+    return {height,diameter };
+}
+
 //1 2 3 4 5 6 7 -1 -1 -1 -1 8 9 -1 -1 -1 -1 -1 -1 
 int main(){
     // TreeNode <int > * root = new TreeNode <int> (1);
@@ -127,7 +181,7 @@ int main(){
     // root->left= r1; root->right=r2;
 
     // TreeNode <int> * root= recuriveinput();
-    TreeNode <int> * root= input();
+    // TreeNode <int> * root= input();
     // print(root);
     // cout<<countnodes(root)<<endl;
     // int k; cin>>k;
@@ -137,6 +191,20 @@ int main(){
     // print(root);
     // inorder(root);
     // preorder(root);
-    postorder(root);
+    // postorder(root);
+    //-------------------conversion--------------------
+    // int n;
+    // cin>>n;
+    // int in[n],pre[n];
+    // for(auto &i: pre) cin>>i;
+    // for(auto &i:in) cin>>i;
+    // TreeNode <int> * root= conversion(in,pre,n);
+    //-------------------diameter----------------------
+    TreeNode <int> * root= input();
+    pair<int,int> temp= diameterOp(root);
+    print(root);
+    cout<<"height:"<<temp.first<<endl;
+    cout<<"diamter:"<<temp.second<<endl;
+    cout<<(max(temp.first , temp.second))<<endl;
     delete root;
 }
