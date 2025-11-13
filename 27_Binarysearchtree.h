@@ -79,7 +79,7 @@ class bst{
                 TreeNode <int> * n = root->left;
                 root->left=NULL;
                 delete(root);
-                return root->left;
+                return n;
             }
             else if(root->right) {
                 TreeNode  <int> * n = root->right;

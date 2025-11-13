@@ -54,9 +54,23 @@ TreeNode <int> * dupe(TreeNode<int> * root){
     return root;
 
 }
+TreeNode <int> * LCA(TreeNode <int> * root ,int a, int b){
+    if(!root) return NULL;
+    if(root->data==a || root->data == b) return root;
+    TreeNode <int> * left=  LCA(root->left, a, b);
+    TreeNode <int> * right=  LCA(root->right, a, b);
+    if(left && right) return root;
+    return left!=NULL?left:right;
+    // return NULL;
+}
 int main() {
     TreeNode <int> * root =input();
-    root=dupe(root);
-    print(root);
-    return 0;
+    // root=dupe(root);
+    // print(root);
+
+    //----------------------------LCA OF BT-----------------------------
+    int a,b;cin>>a>>b;
+    TreeNode <int>* ans= LCA(root,a,b);
+    if(!ans) cout<<"-1\n";
+    else cout<<ans->data<<endl;
 }
