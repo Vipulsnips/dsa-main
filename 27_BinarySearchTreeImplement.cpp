@@ -139,7 +139,7 @@ vector <int> * path(TreeNode<int> * root,int k){
     return NULL;
 }
 int main(){
-    TreeNode <int > * root= input();
+    // TreeNode <int > * root= input();
     //-------------------searching-----------------------------
     // int k;cin>>k;
     // cout<<search(root , k)<<endl;
@@ -164,9 +164,22 @@ int main(){
     // printLL(curr.first);
 
     //------------------------searching and path finding------------------------
-    int k;cin>>k;
-    vector<int> * ans = path(root,k);
-    for(auto i : *ans) cout<<i<<" ";
-    delete ans;
-    delete root;
+    // int k;cin>>k;
+    // vector<int> * ans = path(root,k);
+    // for(auto i : *ans) cout<<i<<" ";
+    // delete ans;
+    // delete root;
+
+    //---------------------------bst class---------------
+    bst b;
+    b.insertdata(10);
+    b.insertdata(5);
+    b.insertdata(20); 
+    b.insertdata(7);
+    b.insertdata(3);
+    b.insertdata(15);
+    b.printtree();
+    b.deletedata(10);
+    b.deletedata(100);
+    b.printtree();
 }
